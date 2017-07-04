@@ -11,6 +11,23 @@ libraryDependencies ++= Seq(
 ScriptedPlugin.scriptedSettings
 scriptedLaunchOpts ++= Seq("-Xmx1024M", "-XX:MaxPermSize=256M", "-Dplugin.version=" + version.value)
 
+releaseProcess := {
+  import ReleaseTransformations._
+  Seq[ReleaseStep](
+    checkSnapshotDependencies,
+    inquireVersions,
+    runTest,
+    releaseStepInputTask(scripted), // added
+    setReleaseVersion,
+    commitReleaseVersion,
+    tagRelease,
+    publishArtifacts,
+    setNextVersion,
+    commitNextVersion,
+    pushChanges
+  )
+}
+
 pomExtra in Global := {
   <url>https://github.com/dwickern/sbt-forbidden-apis</url>
     <licenses>
