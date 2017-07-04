@@ -1,0 +1,17 @@
+> set forbiddenApis.targetCompatibility := Some("1.8")
+> set forbiddenApis.failOnUnresolvableSignatures := false
+
+# successful: no signatures
+> checkForbiddenApis
+
+# fails: `OffsetDateTime.now()` without locale
+> set forbiddenApis.bundledSignatures := Set("jdk-unsafe")
+-> checkForbiddenApis
+
+# fails: `File#toURL` is deprecated
+> set forbiddenApis.bundledSignatures := Set("jdk-deprecated")
+-> checkForbiddenApis
+
+# fails: `sun.misc.Unsafe` is non-portable
+> set forbiddenApis.bundledSignatures := Set("jdk-non-portable")
+-> checkForbiddenApis

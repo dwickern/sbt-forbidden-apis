@@ -1,0 +1,2 @@
+@defaultMessage chill out, it's already a string!
+java.lang.String#toString()

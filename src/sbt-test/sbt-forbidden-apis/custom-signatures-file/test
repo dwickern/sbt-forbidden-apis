@@ -1,0 +1,3 @@
+> set forbiddenApis.targetCompatibility := Some("1.8")
+> set forbiddenApis.signaturesFiles := Set(file("signatures.txt"))
+-> checkForbiddenApis
